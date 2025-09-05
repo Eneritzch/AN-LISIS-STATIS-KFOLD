@@ -1,3 +1,5 @@
+#Librerías 
+
 library(shiny)
 library(readxl)
 library(ade4)
@@ -12,6 +14,8 @@ library(gridExtra)
 library(RColorBrewer)
 library(shinydashboard)
 library(shinyWidgets)
+
+# Paleta de colores y diseño 
 
 ui <- fluidPage(
   tags$head(
@@ -215,6 +219,7 @@ ui <- fluidPage(
     "))
   ),
   
+  #Panel izquierdo
   div(class = "main-layout",
       div(class = "sidebar",
           h4("STATIS-KFOLD"),
@@ -250,6 +255,7 @@ ui <- fluidPage(
           )
       ),
       
+      #Contenido de cada opción del panel izquierdo visualizado en el lado derecho 
       div(class = "main-content",
           div(class = "tab-content",
               
