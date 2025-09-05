@@ -16,30 +16,37 @@ Aplicación de técnicas de validación cruzada K-Fold.
 
 Presentación interactiva de resultados mediante Shiny.
 
-## 3. Dependencias
+## Dependencias necesarias
+
 El proyecto requiere las siguientes librerías de R:
 
-# Manipulación y análisis de datos
-library(dplyr)
-library(tidyr)
-library(ade4)
-library(readxl)
-library(DT)
+- **Interfaz y dashboard**:  
+  - shiny  
+  - shinydashboard  
+  - shinyWidgets  
 
-# Visualización
-library(ggplot2)
-library(ggrepel)
-library(pheatmap)
-library(RColorBrewer)
-library(plotly)
-library(gridExtra)
+- **Lectura y manipulación de datos**:  
+  - readxl  
+  - dplyr  
+  - tidyr  
 
-# Desarrollo de aplicaciones web
-library(shiny)
-library(shinydashboard)
-library(shinycssloaders)
+- **Análisis multivariante**:  
+  - ade4  
 
-Clonar el repositorio:
+- **Tablas interactivas**:  
+  - DT  
+
+- **Visualización**:  
+  - ggplot2  
+  - ggrepel  
+  - plotly  
+  - pheatmap  
+  - RColorBrewer  
+  - gridExtra  
+
+## Instalación
+
+1. Clonar el repositorio:
 
 git clone https://github.com/tu-usuario/nombre-del-repositorio.git
 

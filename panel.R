@@ -1,5 +1,3 @@
-#Librerías 
-
 library(shiny)
 library(readxl)
 library(ade4)
@@ -15,8 +13,6 @@ library(RColorBrewer)
 library(shinydashboard)
 library(shinyWidgets)
 
-# Paleta de colores y diseño 
-
 ui <- fluidPage(
   tags$head(
     tags$meta(name = "viewport", content = "width=device-width, initial-scale=1"),
@@ -27,17 +23,20 @@ ui <- fluidPage(
         background: #f8fafc;
         margin: 0;
       }
+
       .main-layout {
         display: flex;
         min-height: 100vh;
         background: white;
         box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
       }
+
       .sidebar {
         width: 260px;
         background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
         color: white;
       }
+
       .sidebar h4 {
         text-align: center;
         padding: 2rem 1rem;
@@ -45,16 +44,19 @@ ui <- fluidPage(
         font-weight: 700;
         border-bottom: 1px solid rgba(255,255,255,0.1);
       }
+
       .nav-pills {
         list-style: none;
         padding: 1rem 0;
         margin: 0;
         display: block;
       }
+
       .nav-pills li {
         display: block;
         width: 100%;
       }
+
       .nav-pills li a {
         display: flex;
         align-items: center;
@@ -66,20 +68,25 @@ ui <- fluidPage(
         width: 100%;
         box-sizing: border-box;
       }
+
       .nav-pills li a i {
         width: 20px;
         margin-right: 0.75rem;
         flex-shrink: 0;
       }
+
       .nav-pills li a:hover, .nav-pills li.active a {
         background: rgba(59,130,246,0.2);
         color: white;
         border-left-color: #3b82f6;
       }
+
       .main-content {
         flex: 1;
         padding: 2rem;
+        overflow-x: hidden; /* Evita scroll horizontal en el contenido principal */
       }
+
       .section-title {
         display: flex;
         align-items: center;
@@ -91,16 +98,21 @@ ui <- fluidPage(
         padding-bottom: 1rem;
         border-bottom: 2px solid #e2e8f0;
       }
+
       .section-title i {
         color: #3b82f6;
       }
+
       .card {
         background: white;
         border-radius: 12px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         border: 1px solid #e2e8f0;
         margin-bottom: 1.5rem;
+        max-width: 100%;
+        box-sizing: border-box;
       }
+
       .card-header {
         background: #3b82f6;
         color: white;
@@ -111,18 +123,25 @@ ui <- fluidPage(
         align-items: center;
         gap: 0.5rem;
       }
+
       .card-body {
         padding: 1.5rem;
+        overflow-x: auto;
+        max-width: 100%;
+        box-sizing: border-box;
       }
+
       .form-control, .form-select {
         border: 2px solid #e2e8f0;
         border-radius: 8px;
         padding: 0.75rem;
       }
+
       .form-control:focus, .form-select:focus {
         border-color: #3b82f6;
         box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
       }
+
       .btn-primary {
         background: #3b82f6;
         border: none;
@@ -130,16 +149,19 @@ ui <- fluidPage(
         padding: 0.75rem 1.5rem;
         font-weight: 600;
       }
+
       .btn-primary:hover {
         background: #1d4ed8;
         transform: translateY(-1px);
       }
+
       .metrics {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1.5rem;
         margin-bottom: 2rem;
       }
+
       .metric {
         background: white;
         border-radius: 12px;
@@ -148,23 +170,30 @@ ui <- fluidPage(
         border-left: 4px solid #3b82f6;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       }
+
       .metric-value {
         font-size: 2rem;
         font-weight: 800;
         color: #1e293b;
       }
+
       .metric-label {
         color: #64748b;
         font-size: 0.875rem;
         font-weight: 600;
         text-transform: uppercase;
       }
+
       .tab-pane {
         display: none;
+        overflow-x: hidden; /* Evita el scroll horizontal */
+        max-width: 100%;
       }
+
       .tab-pane.active {
         display: block;
       }
+
       .plot-wrapper {
         background: white;
         border-radius: 12px;
@@ -172,7 +201,9 @@ ui <- fluidPage(
         overflow: hidden;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         margin-bottom: 1.5rem;
+        max-width: 100%; /* Limita el ancho máximo */
       }
+
       .plot-title {
         background: #1e293b;
         color: white;
@@ -182,25 +213,79 @@ ui <- fluidPage(
         align-items: center;
         gap: 0.5rem;
       }
+
       .plot-content {
         padding: 1.5rem;
+        overflow: auto; /* Permite scroll interno si es necesario */
+        max-width: 100%;
+        box-sizing: border-box;
       }
+
+      /* Específico para tablas de datos */
+      .dataTables_wrapper {
+        max-width: 100% !important;
+        overflow-x: auto;
+      }
+
+      .dataTables_wrapper table {
+        width: 100% !important;
+        max-width: 100%;
+        table-layout: auto;
+      }
+
+      /* Para los gráficos */
+      .plot-content .shiny-plot-output {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Para el contenido de texto (verbatimTextOutput) */
+      .plot-content pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      /* Para las columnas del fluidRow */
+      .col-sm-6 {
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Estilos adicionales para controlar el overflow */
+      .row {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .container-fluid {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      /* Media queries responsive */
       @media (max-width: 768px) {
         .main-layout { 
           flex-direction: column; 
         }
+        
         .sidebar { 
           width: 100%; 
         }
+        
         .nav-pills { 
           display: flex; 
           flex-wrap: wrap; 
           padding: 0.5rem 0;
         }
+        
         .nav-pills li { 
           flex: 1; 
           min-width: 120px; 
         }
+        
         .nav-pills li a { 
           justify-content: center; 
           padding: 0.75rem 0.5rem; 
@@ -208,18 +293,27 @@ ui <- fluidPage(
           border-bottom: 3px solid transparent; 
           font-size: 0.875rem;
         }
+        
         .nav-pills li a:hover, .nav-pills li.active a { 
           border-left: none; 
           border-bottom-color: #3b82f6; 
         }
+        
         .main-content { 
           padding: 1rem; 
+        }
+        
+        .metrics {
+          grid-template-columns: 1fr;
+        }
+        
+        .plot-content {
+          padding: 1rem;
         }
       }
     "))
   ),
   
-  #Panel izquierdo
   div(class = "main-layout",
       div(class = "sidebar",
           h4("STATIS-KFOLD"),
@@ -255,7 +349,6 @@ ui <- fluidPage(
           )
       ),
       
-      #Contenido de cada opción del panel izquierdo visualizado en el lado derecho 
       div(class = "main-content",
           div(class = "tab-content",
               
